@@ -14,7 +14,7 @@ public class CalculadoraServiceTest {
     }
 
     @Test
-    void testSubitrair() {
+    void testSubtrair() {
         assertEquals(1,service.subtrair(3, 2));
     }
 
