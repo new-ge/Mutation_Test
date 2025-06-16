@@ -33,6 +33,33 @@ public class CalculadoraControllerTest {
     }
 
     @Test
+    void testSubtrair() throws Exception {
+        when(service.subtrair(5, 3)).thenReturn(2.0);
+
+        mockMvc.perform(get("/api/calculadora/subtrair?a=5&b=3"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("2.0"));
+    }
+
+    @Test
+    void testMultiplicar() throws Exception {
+        when(service.multiplicar(4, 5)).thenReturn(20.0);
+
+        mockMvc.perform(get("/api/calculadora/multiplicar?a=4&b=5"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("20.0"));
+    }
+
+    @Test
+    void testDividir() throws Exception {
+        when(service.dividir(10, 2)).thenReturn(5.0);
+
+        mockMvc.perform(get("/api/calculadora/dividir?a=10&b=2"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("5.0"));
+    }
+
+    @Test
     void testDividirPorZero() throws Exception {
         when(service.dividir(5, 0)).thenThrow(new IllegalArgumentException("Divisão por zero não é permitida."));
 
