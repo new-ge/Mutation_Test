@@ -46,3 +46,4 @@ public class CalculadoraController {
     }
 }
 
+//http://localhost:8080/api/calculadora/soma?a=10&b=5

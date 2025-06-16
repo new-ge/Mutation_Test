@@ -103,11 +103,14 @@
 				<version>1.19.5</version>
 				<configuration>
 					<targetClasses>
-						<param>com.mutation.*</param>
+					<param>com.mutation.*</param>
 					</targetClasses>
 					<mutationThreshold>0</mutationThreshold>
 					<failWhenNoMutations>false</failWhenNoMutations>
 					<testPlugin>junit5</testPlugin>
+					<mutators>
+					<mutator>DEFAULTS</mutator>
+					</mutators>
 				</configuration>
 			</plugin>
 		</plugins>
