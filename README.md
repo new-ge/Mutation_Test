@@ -113,3 +113,27 @@ start index.html
 
 - *mutationThreshold*: Percentual mínimo de cobertura de mutação (ajustável)
 - *failWhenNoMutations*: Se true, a build falha quando não há mutações (atualmente está como false)
+
+
+🎯 Em quais tipos de testes o teste de mutação é útil?
+Tipo de teste	Teste de mutação funciona bem?	Explicação
+✅ Teste unitário	⭐⭐⭐⭐⭐ Excelente	Ideal: pequenos métodos testados em isolamento. Mutantes são facilmente associados ao método testado.
+⚠️ Teste de integração	⭐⭐ Razoável	Pode funcionar, mas é mais difícil saber qual mutante sobreviveu e por quê. Também mais difícil isolar problemas.
+❌ Teste de sistema / UI	⭐ Quase inútil	Não recomendado: muito alto nível, cobertura de código específica não é garantida, testes são mais frágeis e lentos.
+❌ Teste manual	🚫 Não se aplica	Teste de mutação só avalia testes automatizados.
+
+--- 
+
+🧪 O que o teste de mutação mede?
+Ele mede se seus testes são capazes de:
+
+Detectar erros comuns de programação simulados (mutações no código).
+
+"Matar mutantes" = os testes falham quando algo está errado (isso é bom).
+
+Identificar áreas mal testadas (mutantes sobrevivem = perigo!).
+
+---
+
+🛡️ Vulnerabilidades que podem ser evitadas indiretamente com teste de mutação
+O teste de mutação trabalha melhor em nível de código, ajudando a encontrar testes que não detectam comportamentos incorretos — e isso, por consequência, pode expor ou deixar passar:
