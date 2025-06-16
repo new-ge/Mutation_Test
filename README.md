@@ -115,25 +115,76 @@ start index.html
 - *failWhenNoMutations*: Se true, a build falha quando não há mutações (atualmente está como false)
 
 
-🎯 Em quais tipos de testes o teste de mutação é útil?
-Tipo de teste	Teste de mutação funciona bem?	Explicação
-✅ Teste unitário	⭐⭐⭐⭐⭐ Excelente	Ideal: pequenos métodos testados em isolamento. Mutantes são facilmente associados ao método testado.
-⚠️ Teste de integração	⭐⭐ Razoável	Pode funcionar, mas é mais difícil saber qual mutante sobreviveu e por quê. Também mais difícil isolar problemas.
-❌ Teste de sistema / UI	⭐ Quase inútil	Não recomendado: muito alto nível, cobertura de código específica não é garantida, testes são mais frágeis e lentos.
-❌ Teste manual	🚫 Não se aplica	Teste de mutação só avalia testes automatizados.
+### 🎯 Em quais tipos de testes o teste de mutação é útil?
+
+| Tipo de teste            | Teste de mutação funciona bem? | Explicação |
+|--------------------------|-------------------------------|------------|
+| ✅ Teste unitário         | ⭐⭐⭐⭐⭐ Excelente                | Ideal: pequenos métodos testados em isolamento. Mutantes são facilmente associados ao método testado. |
+| ⚠️ Teste de integração    | ⭐⭐ Razoável                    | Pode funcionar, mas é mais difícil saber qual mutante sobreviveu e por quê. Também mais difícil isolar problemas. |
+| ❌ Teste de sistema / UI  | ⭐ Quase inútil                 | Não recomendado: muito alto nível, cobertura de código específica não é garantida, testes são mais frágeis e lentos. |
+| ❌ Teste manual           | 🚫 Não se aplica               | Teste de mutação só avalia testes automatizados. |
 
 --- 
 
 🧪 O que o teste de mutação mede?
 Ele mede se seus testes são capazes de:
 
-Detectar erros comuns de programação simulados (mutações no código).
+- Detectar erros comuns de programação simulados (mutações no código).
 
-"Matar mutantes" = os testes falham quando algo está errado (isso é bom).
+- "Matar mutantes" = os testes falham quando algo está errado (isso é bom).
 
-Identificar áreas mal testadas (mutantes sobrevivem = perigo!).
+- Identificar áreas mal testadas (mutantes sobrevivem = perigo!).
 
 ---
 
-🛡️ Vulnerabilidades que podem ser evitadas indiretamente com teste de mutação
+🛡️ Vulnerabilidades que podem ser evitadas indiretamente com teste de mutação:
+
 O teste de mutação trabalha melhor em nível de código, ajudando a encontrar testes que não detectam comportamentos incorretos — e isso, por consequência, pode expor ou deixar passar:
+
+1. Erros de lógica (Logic Flaws)
+
+<details>
+
+Exemplo: validações incorretas, cálculos errados, fluxos mal construídos.
+
+- Isso pode gerar desvios de controle e lógica que ignora regras de negócio críticas.
+
+- Pode facilitar ataques como bypass de autenticação/autorização.
+
+</details>
+
+2. Validações frágeis ou inexistentes
+
+<details>
+
+Se você tem validações de entrada (ex: if (input != null)), o teste de mutação pode inverter operadores (!= → ==) e ver se o teste detecta.
+
+- Se os testes não "matam" esse mutante, significa que a validação é fraca ou mal testada.
+
+- Pode facilitar ataques como injeção (SQL, XSS), negação de serviço, etc.
+
+</details>
+
+3. Comparações inseguras
+
+<details>
+    
+Exemplo: if (senha == entrada) sendo substituído por !=.
+
+- Um bom teste mataria esse mutante.
+
+- Pode prevenir falhas em verificação de autenticação, comparação de tokens, etc.
+
+</details>
+
+4. Fluxos alternativos não testados
+   
+<details>
+
+Mutação pode alterar um if, um return, ou a ordem de execução.
+
+- Se seus testes não detectarem a mudança, significa que certos caminhos críticos podem estar descobertos.
+
+- Pode abrir espaço para lógica de acesso privilegiado acidental.
+
+</details>
